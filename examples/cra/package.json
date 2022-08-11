@@ -1,0 +1,53 @@
+{
+  "name": "@example/cra",
+  "version": "0.0.0",
+  "description": "website demo for react-dev-inspector using create-react-app",
+  "scripts": {
+    "clean": "rimraf dist",
+    "dev": "HOST=localhost FAST_REFRESH=false FORCE_COLOR=true react-app-rewired start | cat",
+    "build": "NODE_ENV=production npm-run-all clean build:*",
+    "build:cra": "PUBLIC_URL=/cra react-app-rewired build && mv build dist"
+  },
+  "repository": "zthxxx/react-dev-inspector/examples/cra",
+  "private": true,
+  "author": "zthxxx",
+  "homepage": "https://react-dev-inspector.zthxxx.me/cra",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": false
+  },
+  "bugs": {
+    "url": "https://github.com/zthxxx/react-dev-inspector/issues"
+  },
+  "dependencies": {
+    "@emotion/css": "11.1.3",
+    "@emotion/react": "11.4.1",
+    "react": "^17.0.0",
+    "react-dev-inspector-enhanced": "^1.0.0",
+    "react-dom": "^17.0.0",
+    "react-github-corner": "2.5.0"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.9.2",
+    "@emotion/styled": "11.3.0",
+    "@types/react-dom": "17.0.9",
+    "customize-cra": "1.0.0",
+    "npm-run-all": "4.1.5",
+    "react-app-rewired": "2.2.1",
+    "react-scripts": "5.0.1",
+    "rimraf": "3.0.2",
+    "typescript": "4.4.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

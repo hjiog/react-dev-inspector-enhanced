@@ -2,13 +2,55 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "esnext",
-    "lib": ["esnext"],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "noEmit": true,
+    "noEmitOnError": false,
+    "declaration": true,
+    "declarationMap": false,
+    "lib": ["dom.iterable", "dom", "esnext"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "strictFunctionTypes": false,
+    "noUnusedLocals": true,
+    "sourceMap": false,
+    "jsx": "react",
+    "allowJs": true,
+    // https://www.typescriptlang.org/tsconfig#composite
+    "composite": false,
+    // https://www.typescriptlang.org/tsconfig#incremental
+    "incremental": false,
+    // https://www.typescriptlang.org/tsconfig#preserveWatchOutput
+    "preserveWatchOutput": true,
+    // https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports
+    "allowSyntheticDefaultImports": true,
+    // https://www.typescriptlang.org/tsconfig#isolatedModules
+    "isolatedModules": true,
+    /**
+     * https://www.typescriptlang.org/tsconfig#useDefineForClassFields
+     * https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#the-usedefineforclassfields-flag-and-the-declare-property-modifier
+     */
+    "useDefineForClassFields": true,
+    // https://www.typescriptlang.org/tsconfig#downlevelIteration
+    "downlevelIteration": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  /**
+   * these options are overrides used only by ts-node
+   * https://github.com/TypeStrong/ts-node
+   */
+  "ts-node": {
+    // It is faster to skip typechecking.
+    // Remove if you want ts-node to do typechecking.
+    "transpileOnly": true,
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }
