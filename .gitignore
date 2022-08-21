@@ -11,4 +11,4 @@ node_modules
 temp
 es
 lib
-plugins
+/plugins/

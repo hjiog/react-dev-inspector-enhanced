@@ -7,6 +7,8 @@ import {
   gotoEditor,
   getElementInspect,
   CodeInfo,
+  addHOC,
+  HOCConfigType,
 } from './utils/inspect';
 import Overlay from './Overlay';
 
@@ -25,7 +27,7 @@ export type ElementHandler = (params: InspectParams) => void;
 
 export const defaultHotKeys = ['control', 'shift', 'command', 'c'];
 
-const logHotKeys = ['command', 'l'];
+const defaultHOCKeys = ['command', 'l'];
 
 export interface InspectorProps extends Record<string, any> {
   /**
@@ -33,13 +35,17 @@ export interface InspectorProps extends Record<string, any> {
    *
    * supported keys see: https://github.com/jaywcjlove/hotkeys#supported-keys
    */
-  keys?: string[];
+  keys?: {
+    gotoEditor: string[];
+    addHOC: string[];
+  };
   onHoverElement?: ElementHandler;
   onClickElement?: ElementHandler;
   /**
    * whether disable click react component to open IDE for view component code
    */
   disableLaunchEditor?: boolean;
+  HOC?: HOCConfigType;
 }
 
 export const Inspector: React.FC<InspectorProps> = props => {
@@ -49,13 +55,18 @@ export const Inspector: React.FC<InspectorProps> = props => {
     onClickElement,
     disableLaunchEditor,
     children,
+    HOC,
   } = props;
-
+  const {
+    gotoEditor: gotoEditorKeys = defaultHotKeys,
+    addHOC: addHOCKeys = defaultHOCKeys,
+  } = keys || {};
   // hotkeys-js params need string
-  const hotkey = (keys ?? defaultHotKeys).join('+');
-  const logHotKey = logHotKeys.join('+');
+  const gotoEditorHotKey = gotoEditorKeys.join('+');
+  const addHOCHotKey = addHOCKeys.join('+');
   /** inspector tooltip overlay */
   const overlayRef = useRef<Overlay>();
+  const shouldAddHOCRef = useRef(false);
   const mousePointRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
   const recordMousePoint = ({ clientX, clientY }: MouseEvent) => {
@@ -110,8 +121,14 @@ export const Inspector: React.FC<InspectorProps> = props => {
     const codeInfo = getElementCodeInfo(element);
     const { fiber, name } = getElementInspect(element);
 
-    console.log(codeInfo, name, '99999');
-    if (!disableLaunchEditor) gotoEditor(codeInfo);
+    console.log(shouldAddHOCRef, codeInfo, HOC);
+
+    if (shouldAddHOCRef) {
+      addHOC(codeInfo, HOC);
+    }
+    if (!disableLaunchEditor) {
+      gotoEditor(codeInfo);
+    }
     onClickElement?.({
       element,
       fiber,
@@ -130,20 +147,20 @@ export const Inspector: React.FC<InspectorProps> = props => {
   useEffect(() => {
     const handleHotKeys: KeyHandler = (event, handler) => {
       console.log(handler);
-      if (handler.key === hotkey) {
+      if (handler.key === gotoEditorHotKey) {
         overlayRef.current ? stopInspect() : startInspect();
+        shouldAddHOCRef.current = false;
+      } else if (handler.key === addHOCHotKey) {
+        overlayRef.current ? stopInspect() : startInspect();
+        shouldAddHOCRef.current = true;
       } else if (handler.key === 'esc' && overlayRef.current) {
         stopInspect();
-      } else if (handler.key === logHotKey) {
-        if (overlayRef.current) {
-          console.log('log==========');
-          fetch('/log');
-        }
+        shouldAddHOCRef.current = false;
       }
     };
 
     // https://github.com/jaywcjlove/hotkeys
-    hotkeys(`${hotkey}, esc, ${logHotKey}`, handleHotKeys);
+    hotkeys(`${gotoEditorHotKey}, esc, ${addHOCHotKey}`, handleHotKeys);
 
     /**
      * @deprecated only for debug, will remove in next version
@@ -152,10 +169,13 @@ export const Inspector: React.FC<InspectorProps> = props => {
       overlayRef.current ? stopInspect() : startInspect();
 
     return () => {
-      hotkeys.unbind(`${hotkey}, esc ,${logHotKey}`, handleHotKeys);
+      hotkeys.unbind(
+        `${gotoEditorHotKey}, esc ,${addHOCHotKey}`,
+        handleHotKeys,
+      );
       delete window.__REACT_DEV_INSPECTOR_TOGGLE__;
     };
-  }, [hotkey]);
+  }, [gotoEditorHotKey]);
 
   return children as ReactElement;
 };

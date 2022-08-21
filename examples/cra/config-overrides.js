@@ -1,6 +1,5 @@
 const {
   launchEditorMiddleware,
-  addLogMiddleware,
   ReactInspectorPlugin,
 } = require('react-dev-inspector-enhanced/plugins/webpack');
 const {
@@ -42,7 +41,7 @@ module.exports = {
   devServer: overrideDevServer(serverConfig => {
     // https://webpack.js.org/configuration/dev-server/#devserversetupmiddlewares
     serverConfig.setupMiddlewares = middlewares => {
-      middlewares.unshift(addLogMiddleware);
+      middlewares.unshift(launchEditorMiddleware);
       return middlewares;
     };
 

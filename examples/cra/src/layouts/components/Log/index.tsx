@@ -1,3 +1,3 @@
-export const Log: React.FC<any> = () => {
-  return <div>log</div>;
+export const Log: React.FC = ({ children }) => {
+  return <div>{children}</div>;
 };

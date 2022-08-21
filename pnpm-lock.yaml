@@ -47,6 +47,7 @@ importers:
       loader-utils: ^2.0.0
       nodemon: 2.0.15
       npm-run-all: 4.1.5
+      picocolors: ^1.0.0
       querystring: ^0.2.1
       react: ^17.0.0
       react-dev-utils: ^12.0.1
@@ -67,6 +68,7 @@ importers:
       '@babel/types': registry.npmmirror.com/@babel/types/7.18.8
       hotkeys-js: registry.npmmirror.com/hotkeys-js/3.9.4
       loader-utils: registry.npmmirror.com/loader-utils/2.0.2
+      picocolors: 1.0.0
       querystring: registry.npmmirror.com/querystring/0.2.1
       react-dev-utils: registry.npmmirror.com/react-dev-utils/12.0.1_154cab7dbc786e310c3b1876477e9a2b
     devDependencies:
@@ -8450,7 +8452,6 @@ packages:
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
-    dev: true
 
   /picomatch/2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
@@ -20247,11 +20248,6 @@ packages:
       safe-buffer: registry.npmmirror.com/safe-buffer/5.2.1
       sha.js: registry.npmmirror.com/sha.js/2.4.11
 
-  registry.npmmirror.com/picocolors/1.0.0:
-    resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/picocolors/-/picocolors-1.0.0.tgz}
-    name: picocolors
-    version: 1.0.0
-
   registry.npmmirror.com/picomatch/2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/picomatch/-/picomatch-2.3.1.tgz}
     name: picomatch
@@ -22257,7 +22253,7 @@ packages:
     dependencies:
       browserslist: registry.npmmirror.com/browserslist/4.21.1
       escalade: registry.npmmirror.com/escalade/3.1.1
-      picocolors: registry.npmmirror.com/picocolors/1.0.0
+      picocolors: 1.0.0
 
   registry.npmmirror.com/update-browserslist-db/1.0.4_browserslist@4.21.2:
     resolution: {integrity: sha512-jnmO2BEGUjsMOe/Fg9u0oczOe/ppIDZPebzccl1yDWGLFP16Pa1/RM5wEoKYPG2zstNcDuAStejyxsOuKINdGA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/update-browserslist-db/-/update-browserslist-db-1.0.4.tgz}
@@ -22270,7 +22266,7 @@ packages:
     dependencies:
       browserslist: registry.npmmirror.com/browserslist/4.21.2
       escalade: registry.npmmirror.com/escalade/3.1.1
-      picocolors: registry.npmmirror.com/picocolors/1.0.0
+      picocolors: 1.0.0
     dev: true
 
   registry.npmmirror.com/update-notifier/5.1.0:

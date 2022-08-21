@@ -199,6 +199,29 @@ export const gotoEditor = (source?: CodeInfo) => {
   fetch(`${apiRoute}?${queryString.stringify(launchParams)}`);
 };
 
+export type HOCConfigType = {
+  importCode: string;
+  name: string;
+  params?: Record<string, any>;
+};
+
+export const addHOC = (source?: CodeInfo, HOC?: HOCConfigType) => {
+  if (!source || !HOC) return;
+
+  const { lineNumber, columnNumber, relativePath, absolutePath } = source;
+
+  const isRelative = Boolean(relativePath);
+
+  const launchParams = {
+    fileName: isRelative ? relativePath : absolutePath,
+    lineNumber,
+    colNumber: columnNumber,
+    HOC: JSON.stringify(HOC),
+  };
+
+  fetch(`/hoc?${queryString.stringify(launchParams)}`);
+};
+
 export const getNamedFiber = (baseFiber?: Fiber): Fiber | undefined => {
   let fiber = baseFiber;
 

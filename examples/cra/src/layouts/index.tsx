@@ -1,12 +1,30 @@
+import { Log } from './components/Log';
 import { Inspector } from 'react-dev-inspector-enhanced';
 
 export const HomePage = () => {
   return (
     <Inspector
-      keys={['shift', 'command', 's']}
-      disableLaunchEditor={false}
-      tt="33l"
-    />
+      HOC={{
+        name: 'Log',
+        importCode: `import { Log } from './components/Log';`,
+      }}
+      keys={{
+        gotoEditor: ['shift', 'command', 's'],
+        addHOC: ['command', 'shift', 'l'],
+      }}>
+      <div>
+        <div>
+          father
+          <Log>
+            <div>test1</div>
+          </Log>
+          <div>test2</div>
+          <Log>
+            <div>test3</div>
+          </Log>
+        </div>
+      </div>
+    </Inspector>
   );
   // return <div>test</div>;
 };
