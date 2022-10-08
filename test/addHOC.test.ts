@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { transfer } from '../src/plugins/webpack/addHOC';
+import { transform } from '../src/plugins/webpack/addHOC';
 
 const text = `import { Inspector } from 'react-dev-inspector-enhanced';
 
@@ -30,9 +30,9 @@ export const HomePage = () => {
 export default HomePage;
 `;
 
-describe('should transfer correct', () => {
-  it('has not imported, lineNumber: 5, colNumber: 4', () => {
-    const res = transfer({
+describe('should transform correct', () => {
+  it('when Log has not imported 1', () => {
+    const res = transform({
       text,
       componentName: 'Log',
       importCode: `import { Log } from './components/Log';`,
@@ -71,8 +71,8 @@ describe('should transfer correct', () => {
       "
     `);
   });
-  it('has not imported, lineNumber: 10, colNumber: 17', () => {
-    const res = transfer({
+  it('when Log has not imported 2', () => {
+    const res = transform({
       text,
       componentName: 'Log',
       importCode: `import { Log } from './components/Log';`,
@@ -111,8 +111,8 @@ describe('should transfer correct', () => {
       "
     `);
   });
-  it('has been imported, lineNumber: 10, colNumber: 17', () => {
-    const res = transfer({
+  it('should not import twice when Log has been imported', () => {
+    const res = transform({
       text: `import { Log } from './components/Log';\n` + text,
       componentName: 'Log',
       importCode: `import { Log } from './components/Log';`,
@@ -151,8 +151,8 @@ describe('should transfer correct', () => {
       "
     `);
   });
-  it('not transform', () => {
-    const res = transfer({
+  it('should not transform when Log is a child', () => {
+    const res = transform({
       text: '<Log><div>test</div></Log>',
       componentName: 'Log',
       importCode: `import { Log } from './components/Log';`,

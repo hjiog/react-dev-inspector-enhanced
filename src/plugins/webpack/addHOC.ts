@@ -1,7 +1,7 @@
 import fsExtra from 'fs-extra';
 import pc from 'picocolors';
 
-export const transfer = (params: {
+export const transform = (params: {
   text: string;
   lineNumber: number;
   colNumber: number;
@@ -10,10 +10,11 @@ export const transfer = (params: {
 }) => {
   const { text, colNumber, lineNumber, componentName, importCode } = params;
   const splits = text.split('\n');
-  const preText = splits
-    .slice(0, lineNumber - 1)
-    .concat(new Array(colNumber).fill(' ').join(''))
-    .join('\n');
+  const preText =
+    splits.slice(0, lineNumber - 1).join('\n') +
+    '\n' +
+    splits[lineNumber - 1].slice(0, colNumber);
+
   const targetText = splits
     .slice(lineNumber - 1)
     .join('\n')
@@ -51,7 +52,7 @@ export const addHOC = async (params: {
   // console.log(absolutePath);
   try {
     const text = fsExtra.readFileSync(absolutePath).toString();
-    const res = transfer({ text, ...params });
+    const res = transform({ text, ...params });
     if (res) {
       fsExtra.writeFileSync(absolutePath, res);
     }

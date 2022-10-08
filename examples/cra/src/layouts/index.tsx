@@ -13,15 +13,13 @@ export const HomePage = () => {
         addHOC: ['command', 'shift', 'l'],
       }}>
       <div>
-        <div>
+        <div className="father">
           father
+          <div>test1</div>
           <Log>
-            <div>test1</div>
+            <div>test2</div>
           </Log>
-          <div>test2</div>
-          <Log>
-            <div>test3</div>
-          </Log>
+          <div>test3</div>
         </div>
       </div>
     </Inspector>
